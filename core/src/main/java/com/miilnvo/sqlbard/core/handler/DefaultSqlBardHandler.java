@@ -283,12 +283,12 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
         for (int i = 0; i < sqlParamList.size(); ++i) {
             completeSql.append(new String(sqlArray[i]));
             Object param = sqlParamList.get(i);
-            if (param instanceof String) {
-                completeSql.append("'");
+            if (param instanceof Number) {
                 completeSql.append(param);
-                completeSql.append("'");
             } else {
+                completeSql.append("'");
                 completeSql.append(param);
+                completeSql.append("'");
             }
         }
         completeSql.append(new String(sqlArray[sqlParamList.size()]));
