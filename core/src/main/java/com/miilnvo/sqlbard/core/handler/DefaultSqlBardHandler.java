@@ -63,8 +63,8 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
                 SimpleStringUtil.convertStrToList(properties.getProperty("allowPathRegexList")),
                 SimpleStringUtil.convertStrToList(properties.getProperty("notAllowPathRegexList")));
         slowSqlFilterHandler = new SlowSqlFilterHandler(
-                Long.valueOf(properties.getProperty("maxSqlExecuteMillisecond")),
-                Boolean.valueOf(properties.getProperty("useSlowSqlFilter")));
+                properties.getProperty("maxSqlExecuteMillisecond") == null ? null : Long.valueOf(properties.getProperty("maxSqlExecuteMillisecond")),
+                properties.getProperty("useSlowSqlFilter") == null ? null : Boolean.valueOf(properties.getProperty("useSlowSqlFilter")));
     }
 
     private boolean isEnabled() {

@@ -8,14 +8,14 @@ package com.miilnvo.sqlbard.core.handler;
  */
 public class SlowSqlFilterHandler {
 
-    private long maxSqlExecuteMillisecond = 1000;
+    private Long maxSqlExecuteMillisecond = 1000L;
 
-    private boolean enabled = false;
+    private Boolean enabled = false;
 
     public SlowSqlFilterHandler() {
     }
 
-    public SlowSqlFilterHandler(long maxSqlExecuteMillisecond, boolean enabled) {
+    public SlowSqlFilterHandler(Long maxSqlExecuteMillisecond, Boolean enabled) {
         this.maxSqlExecuteMillisecond = maxSqlExecuteMillisecond;
         this.enabled = enabled;
     }

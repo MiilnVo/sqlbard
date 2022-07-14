@@ -1,6 +1,5 @@
 package com.miilnvo.sqlbard.core.handler;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,9 +11,9 @@ import java.util.Objects;
  */
 public class PathFilterHandler {
 
-    private List<String> allowPathList = new ArrayList<>();
+    private List<String> allowPathList;
 
-    private List<String> notAllowPathList = new ArrayList<>();
+    private List<String> notAllowPathList;
 
     public PathFilterHandler() {
     }
