@@ -15,9 +15,6 @@ public class PathFilterHandler {
 
     private List<String> notAllowPathList;
 
-    public PathFilterHandler() {
-    }
-
     public PathFilterHandler(List<String> allowPathList, List<String> notAllowPathList) {
         this.allowPathList = allowPathList;
         this.notAllowPathList = notAllowPathList;

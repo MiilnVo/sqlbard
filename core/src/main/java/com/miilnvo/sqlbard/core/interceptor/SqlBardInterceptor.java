@@ -24,15 +24,22 @@ public class SqlBardInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        long time = -1;
-        try {
-            long startTime = SystemClock.now();
-            Object result = invocation.proceed();
-            time = SystemClock.now() - startTime;
-            return result;
-
-        } finally {
-            sqlBardHandler.execute(invocation, time);
+        if (sqlBardHandler.isShowExecuteTime()) {
+            long time = -1;
+            try {
+                long startTime = SystemClock.now();
+                Object result = invocation.proceed();
+                time = SystemClock.now() - startTime;
+                return result;
+            } finally {
+                sqlBardHandler.execute(invocation, time);
+            }
+        } else {
+            try {
+                return invocation.proceed();
+            } finally {
+                sqlBardHandler.execute(invocation);
+            }
         }
     }
 

@@ -26,17 +26,20 @@ import java.util.Properties;
 @Slf4j
 public class DefaultSqlBardHandler implements SqlBardHandler {
 
-    private boolean enabled = true;
+    private Boolean enabled = true;
+
+    private Boolean showExecuteTime = false;
+
+    private Long maxExecuteMillisecond;
 
     private PathFilterHandler pathFilterHandler;
 
-    private SlowSqlFilterHandler slowSqlFilterHandler;
-
     @Override
-    public void execute(Invocation invocation, Long time) throws Exception {
-        if (isEnabled() && useSlowSqlFilterAndNotSlowSql(time)) {
+    public void execute(Invocation invocation, Long executeTime) throws Exception {
+        if (!isEnabled()) {
             return;
         }
+
         SqlBardDefaultParameter sqlBardDefaultParameter = buildDefaultParameterHandler(invocation);
 
         String currentPath = sqlBardDefaultParameter.getMappedStatement().getId();
@@ -53,30 +56,49 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
 
         String completeSql = buildCompleteSql(sqlArray, sqlParamList);
 
-        printSqlLog(completeSql, time);
+        printSqlLog(completeSql, executeTime);
+    }
+
+    @Override
+    public void execute(Invocation invocation) throws Exception {
+        execute(invocation, null);
     }
 
     @Override
     public void setProperties(Properties properties) {
-        enabled = Boolean.valueOf(properties.getProperty("enabled"));
+        String enabled = properties.getProperty("enabled");
+        String showExecuteTime = properties.getProperty("showExecuteTime");
+        String maxExecuteMillisecond = properties.getProperty("maxExecuteMillisecond");
+
+        if (enabled != null) {
+            this.enabled = Boolean.valueOf(enabled);
+        }
+        if (showExecuteTime != null) {
+            this.showExecuteTime = Boolean.valueOf(showExecuteTime);
+        }
+        if (maxExecuteMillisecond != null) {
+            this.maxExecuteMillisecond = Long.valueOf(maxExecuteMillisecond);
+        }
+
         pathFilterHandler = new PathFilterHandler(
                 SimpleStringUtil.convertStrToList(properties.getProperty("allowPathList")),
                 SimpleStringUtil.convertStrToList(properties.getProperty("notAllowPathList")));
-        slowSqlFilterHandler = new SlowSqlFilterHandler(
-                properties.getProperty("maxSqlExecuteMillisecond") == null ? null : Long.valueOf(properties.getProperty("maxSqlExecuteMillisecond")),
-                properties.getProperty("useSlowSqlFilter") == null ? null : Boolean.valueOf(properties.getProperty("useSlowSqlFilter")));
     }
 
-    private boolean isEnabled() {
+    private Boolean isEnabled() {
         return enabled;
     }
 
-    private boolean isAllowCurrentPath(String currentPath) {
-        return pathFilterHandler.isAllowCurrentPath(currentPath);
+    public Long getMaxExecuteMillisecond() {
+        return maxExecuteMillisecond;
     }
 
-    private boolean useSlowSqlFilterAndNotSlowSql(Long time) {
-        return slowSqlFilterHandler.useSlowSqlFilterAndNotSlowSql(time);
+    public Boolean isShowExecuteTime() {
+        return showExecuteTime;
+    }
+
+    private Boolean isAllowCurrentPath(String currentPath) {
+        return pathFilterHandler.isAllowCurrentPath(currentPath);
     }
 
     /**
@@ -299,10 +321,15 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
     /**
      * 输出日志
      *
-     * @param sql sql
+     * @param sql         sql
+     * @param executeTime executeTime
      */
-    private void printSqlLog(String sql, long time) {
-        log.info("[SQLBard] sql = {}, time = {}ms", sql, time);
+    private void printSqlLog(String sql, Long executeTime) {
+        if (!isShowExecuteTime()) {
+            log.info("[SQLBard] sql = {}", sql);
+        } else if (getMaxExecuteMillisecond() == null || (getMaxExecuteMillisecond() != null && executeTime > getMaxExecuteMillisecond())) {
+            log.info("[SQLBard] sql = {}, time = {}ms", sql, executeTime);
+        }
     }
 
 }
