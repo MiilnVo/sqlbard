@@ -25,6 +25,10 @@ public class PathFilterHandler {
     }
 
     public boolean isAllowCurrentPath(String currentPath) {
+        return handleAllowPathList(currentPath) && handleNotAllowPathList(currentPath);
+    }
+
+    private boolean handleAllowPathList(String currentPath) {
         boolean allowPathResult = false;
         if (allowPathList == null || allowPathList.size() == 0) {
             allowPathResult = true;
@@ -44,8 +48,11 @@ public class PathFilterHandler {
                 }
             }
         }
+        return allowPathResult;
+    }
 
-        boolean notAllowPathResult = false;
+    private boolean handleNotAllowPathList(String currentPath) {
+        boolean notAllowPathResult = true;
         if (notAllowPathList != null && notAllowPathList.size() > 0) {
             for (String notAllowPath : notAllowPathList) {
                 int samePath = 0;
@@ -57,12 +64,12 @@ public class PathFilterHandler {
                     }
                 }
                 if (samePath == notAllowPaths.length) {
-                    notAllowPathResult = true;
+                    notAllowPathResult = false;
                     break;
                 }
             }
         }
-        return allowPathResult && !notAllowPathResult;
+        return notAllowPathResult;
     }
 
 }
