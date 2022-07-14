@@ -20,11 +20,17 @@ public final class SimpleStringUtil {
     public static String removeWhitespace(String rawStr) {
         StringTokenizer stringTokenizer = new StringTokenizer(rawStr);
         StringBuilder builder = new StringBuilder();
+        boolean hasNullLastChar = false;
         while (stringTokenizer.hasMoreTokens()) {
             builder.append(stringTokenizer.nextToken());
             builder.append(" ");
+            hasNullLastChar = true;
         }
-        return builder.toString();
+        if (hasNullLastChar) {
+            return builder.substring(0, builder.length() - 1);
+        } else {
+            return builder.toString();
+        }
     }
 
     public static List<String> convertStrToList(String rawStr) {
