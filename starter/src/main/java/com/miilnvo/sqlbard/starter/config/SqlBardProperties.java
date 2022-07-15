@@ -17,50 +17,42 @@ public class SqlBardProperties extends Properties {
     static final String SQLBARD_PREFIX = "sqlbard";
 
     public Boolean isEnabled() {
-        return Boolean.valueOf(getProperty("enabled") != null ? getProperty("enabled") : "true");
+        return getProperty("enabled") != null ? Boolean.valueOf(getProperty("enabled")) : true;
     }
 
     public void setEnabled(Boolean enabled) {
         setProperty("enabled", enabled.toString());
     }
 
-    public List<String> getAllowPathRegexList() {
-        return SimpleStringUtil.convertStrToList(getProperty("allowPathRegexList"));
+    public List<String> getAllowPathList() {
+        return SimpleStringUtil.convertStrToList(getProperty("allowPathList"));
     }
 
-    public void setAllowPathRegexList(List<String> allowPathRegexList) {
-        setProperty("allowPathRegexList", SimpleStringUtil.convertListToStr(allowPathRegexList));
+    public void setAllowPathList(List<String> allowPathList) {
+        setProperty("allowPathList", SimpleStringUtil.convertListToStr(allowPathList));
     }
 
-    public List<String> getNotAllowPathRegexList() {
-        return SimpleStringUtil.convertStrToList(getProperty("getNotAllowPathRegexList"));
+    public List<String> getNotAllowPathList() {
+        return SimpleStringUtil.convertStrToList(getProperty("notAllowPathList"));
     }
 
-    public void setNotAllowPathRegexList(List<String> notAllowPathRegexList) {
-        setProperty("notAllowPathRegexList", SimpleStringUtil.convertListToStr(notAllowPathRegexList));
+    public void setNotAllowPathList(List<String> notAllowPathList) {
+        setProperty("notAllowPathList", SimpleStringUtil.convertListToStr(notAllowPathList));
     }
 
-    public Boolean isUseSlowSqlFilter() {
-        return Boolean.valueOf(getProperty("isUseSlowSqlFilter") != null ? getProperty("isUseSlowSqlFilter") : "false");
+    public Boolean getShowExecuteTime() {
+        return getProperty("showExecuteTime") != null ? Boolean.valueOf(getProperty("showExecuteTime")) : false;
     }
 
-    public void setUseSlowSqlFilter(Boolean useSlowSqlFilter) {
-        setProperty("useSlowSqlFilter", useSlowSqlFilter.toString());
+    public void setShowExecuteTime(Boolean showExecuteTime) {
+        setProperty("showExecuteTime", showExecuteTime.toString());
     }
 
-    public Boolean isShowSqlExecuteTime() {
-        return Boolean.valueOf(getProperty("isShowSqlExecuteTime") != null ? getProperty("isShowSqlExecuteTime") : "true");
+    public Long getMaxExecuteMillisecond() {
+        return Long.valueOf(getProperty("getMaxExecuteMillisecond"));
     }
 
-    public void setShowSqlExecuteTime(Boolean showSqlExecuteTime) {
-        setProperty("showSqlExecuteTime", showSqlExecuteTime.toString());
-    }
-
-    public Long getMaxSqlExecuteMillisecond() {
-        return Long.valueOf(getProperty("getMaxSqlExecuteMillisecond"));
-    }
-
-    public void setMaxSqlExecuteMillisecond(Long maxSqlExecuteMillisecond) {
-        setProperty("maxSqlExecuteMillisecond", maxSqlExecuteMillisecond.toString());
+    public void setMaxExecuteMillisecond(Long maxExecuteMillisecond) {
+        setProperty("maxExecuteMillisecond", maxExecuteMillisecond.toString());
     }
 }
