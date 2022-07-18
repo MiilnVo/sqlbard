@@ -62,12 +62,6 @@
 
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-autoconfigure</artifactId>
-                <version>${mybatis-spring-boot.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring-boot.version}</version>
             </dependency>
@@ -90,6 +84,12 @@
             <dependency>
                 <groupId>com.miilnvo.sqlbard</groupId>
                 <artifactId>sqlbard-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.miilnvo.sqlbard</groupId>
+                <artifactId>sqlbard-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
