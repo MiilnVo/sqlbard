@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.miilnvo.sqlbard.example.mapper.UserMapper">
+
+    <select id="selectList" resultType="com.miilnvo.sqlbard.example.pojo.User">
+        SELECT * FROM `user` LIMIT 10;
+    </select>
+
+</mapper>
