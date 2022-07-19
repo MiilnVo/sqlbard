@@ -34,6 +34,8 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
 
     private PathFilterHandler pathFilterHandler;
 
+    private TypeConvertHandler typeConvertHandler;
+
     @Override
     public void execute(Invocation invocation, Long executeTime) throws Exception {
         if (!isEnabled()) {
@@ -83,6 +85,10 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
         pathFilterHandler = new PathFilterHandler(
                 SimpleStringUtil.convertStrToList(properties.getProperty("allowPathList")),
                 SimpleStringUtil.convertStrToList(properties.getProperty("notAllowPathList")));
+
+        typeConvertHandler = new TypeConvertHandler(
+                properties.getProperty("booleanStrategy"),
+                properties.getProperty("enumStrategy"));
     }
 
     private Boolean isEnabled() {
@@ -305,13 +311,7 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
         for (int i = 0; i < sqlParamList.size(); ++i) {
             completeSql.append(new String(sqlArray[i]));
             Object param = sqlParamList.get(i);
-            if (param instanceof Number) {
-                completeSql.append(param);
-            } else {
-                completeSql.append("'");
-                completeSql.append(param);
-                completeSql.append("'");
-            }
+            completeSql.append(typeConvertHandler.convert(param));
         }
         completeSql.append(new String(sqlArray[sqlParamList.size()]));
 

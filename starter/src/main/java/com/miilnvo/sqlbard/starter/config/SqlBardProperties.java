@@ -21,7 +21,7 @@ public class SqlBardProperties extends Properties {
     }
 
     public void setEnabled(Boolean enabled) {
-        setProperty("enabled", enabled.toString());
+        setProperty("enabled", enabled ? enabled.toString() : "true");
     }
 
     public List<String> getAllowPathList() {
@@ -45,14 +45,31 @@ public class SqlBardProperties extends Properties {
     }
 
     public void setShowExecuteTime(Boolean showExecuteTime) {
-        setProperty("showExecuteTime", showExecuteTime.toString());
+        setProperty("showExecuteTime", showExecuteTime ? showExecuteTime.toString() : "true");
     }
 
     public Long getMaxExecuteMillisecond() {
-        return Long.valueOf(getProperty("getMaxExecuteMillisecond"));
+        return Long.valueOf(getProperty("maxExecuteMillisecond"));
     }
 
     public void setMaxExecuteMillisecond(Long maxExecuteMillisecond) {
         setProperty("maxExecuteMillisecond", maxExecuteMillisecond.toString());
     }
+
+    public String getBooleanStrategy() {
+        return getProperty("booleanStrategy") != null ? getProperty("booleanStrategy") : "toNumber";
+    }
+
+    public void setBooleanStrategy(String booleanStrategy) {
+        setProperty("booleanStrategy", booleanStrategy != null ? booleanStrategy : "toNumber");
+    }
+
+    public String getEnumStrategy() {
+        return getProperty("enumStrategy") != null ? getProperty("enumStrategy") : "toName";
+    }
+
+    public void setEnumStrategy(String enumStrategy) {
+        setProperty("enumStrategy", enumStrategy != null ? enumStrategy : "toName");
+    }
+
 }
