@@ -6,4 +6,43 @@
         SELECT * FROM `user` LIMIT 10;
     </select>
 
+    <select id="selectOne" resultType="com.miilnvo.sqlbard.example.pojo.User">
+        SELECT
+         t_integer AS tInteger,
+         t_float AS tFloat,
+         t_double AS tDouble,
+         t_long AS tLong,
+         t_char AS tChar,
+         t_bytes AS tBytes,
+         t_string AS tString,
+         t_bigdecimal AS tBigDecimal,
+         t_gender AS tGender,
+         t_enabled AS tEnabled,
+         t_year AS tYear,
+         t_date AS tDate,
+         t_time AS tTime,
+         t_localdate AS tLocalDate,
+         t_localtime AS tLocalTime,
+         t_localdatetime AS tLocalDateTime,
+         t_timestamp AS tTimestamp
+        FROM `user` WHERE
+        `t_integer` = #{tInteger}
+        AND `t_float` = #{tFloat}
+        AND `t_double` = #{tDouble}
+        AND `t_long` = #{tLong}
+        AND `t_char` = #{tChar}
+        AND `t_bytes` = #{tBytes}
+        AND `t_string` = #{tString}
+        AND `t_bigdecimal` = #{tBigDecimal}
+        AND `t_gender` = #{tGender}
+        AND `t_enabled` = #{tEnabled}
+        AND `t_year` = #{tYear}
+        AND `t_date` = #{tDate}
+        AND `t_time` = #{tTime}
+        AND `t_localdate` = #{tLocalDate}
+        AND `t_localtime` = #{tLocalTime}
+        AND `t_localdatetime` = #{tLocalDateTime}
+        AND `t_timestamp` = #{tTimestamp}
+    </select>
+
 </mapper>

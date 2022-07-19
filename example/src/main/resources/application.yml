@@ -1,20 +1,30 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:test-db;MODE=MYSQL
-    username: sa
-    password: sa
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://127.0.0.1:3306/m?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    url: jdbc:h2:mem:test-db;MODE=MYSQL
+#    username: sa
+#    password: sa
+#    driver-class-name: org.h2.Driver
   sql:
     init:
+      mode: always
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 sqlbard:
   enabled: true
+  showExecuteTime: true
 #  allowPathList:
 #  notAllowPathList:
-  showExecuteTime: true
 #  maxExecuteMillisecond: -1
+#  booleanStrategy: toNumber
+#  enumStrategy: toName

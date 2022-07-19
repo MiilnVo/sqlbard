@@ -2,7 +2,13 @@ package com.miilnvo.sqlbard.example.pojo;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Year;
 import java.util.Date;
 
 /**
@@ -12,18 +18,42 @@ import java.util.Date;
 @Data
 public class User {
 
-    private Long id;
+    private Integer tInteger;
 
-    private String name;
+    private Float tFloat;
 
-    private String password;
+    private Double tDouble;
 
-    private Integer age;
+    private Long tLong;
 
-    private Date birthday;
+    private Character tChar;
 
-    private LocalDateTime registerTime;
+    private byte[] tBytes;
 
-    private Boolean enabled;
+    private String tString;
+
+    private BigDecimal tBigDecimal;
+
+    private Gender tGender;
+
+    private Boolean tEnabled;
+
+    private Year tYear;
+
+    private Date tDate;
+
+    private Time tTime;
+
+    private LocalDate tLocalDate;
+
+    private LocalTime tLocalTime;
+
+    private LocalDateTime tLocalDateTime;
+
+    private Timestamp tTimestamp;
+
+    public enum Gender {
+        male, woman
+    }
 
 }
