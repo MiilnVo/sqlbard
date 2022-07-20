@@ -31,7 +31,7 @@ Rendering SQL as graceful as Bard for MyBatis
 <dependency>
     <groupId>com.miilnvo.sqlbard</groupId>
     <artifactId>sqlbard-starter</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -68,7 +68,7 @@ sqlbard:
 <dependency>
     <groupId>com.miilnvo.sqlbard</groupId>
     <artifactId>sqlbard-core</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 （2）在MyBatis的xml配置文件中添加SQLBard拦截器
