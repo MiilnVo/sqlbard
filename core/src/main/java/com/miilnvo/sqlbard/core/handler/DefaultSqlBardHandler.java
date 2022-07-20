@@ -30,7 +30,7 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
 
     private Boolean showExecuteTime = false;
 
-    private Long maxExecuteMillisecond;
+    private Long maxExecuteMillisecond = -1L;
 
     private PathFilterHandler pathFilterHandler;
 
