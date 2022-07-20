@@ -14,18 +14,16 @@ public interface SqlBardHandler {
      * 执行处理
      *
      * @param invocation invocation
-     * @throws Exception exception
      */
-    void execute(Invocation invocation) throws Exception;
+    void execute(Invocation invocation);
 
     /**
      * 执行处理
      *
      * @param invocation  invocation
      * @param executeTime executeTime
-     * @throws Exception exception
      */
-    void execute(Invocation invocation, Long executeTime) throws Exception;
+    void execute(Invocation invocation, Long executeTime);
 
     /**
      * 设置属性

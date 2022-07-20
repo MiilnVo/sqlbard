@@ -37,32 +37,37 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
     private TypeConvertHandler typeConvertHandler;
 
     @Override
-    public void execute(Invocation invocation, Long executeTime) throws Exception {
-        if (!isEnabled()) {
-            return;
+    public void execute(Invocation invocation, Long executeTime) {
+        try {
+            if (!isEnabled()) {
+                return;
+            }
+
+            SqlBardDefaultParameter sqlBardDefaultParameter = buildDefaultParameterHandler(invocation);
+
+            String currentPath = sqlBardDefaultParameter.getMappedStatement().getId();
+            if (!isAllowCurrentPath(currentPath)) {
+                return;
+            }
+
+            String sql = sqlBardDefaultParameter.getBoundSql().getSql();
+            sql = SimpleStringUtil.removeWhitespace(sql);
+
+            byte[][] sqlArray = parseSql(sql);
+
+            List<Object> sqlParamList = buildSqlParamList(sqlBardDefaultParameter);
+
+            String completeSql = buildCompleteSql(sqlArray, sqlParamList);
+
+            printSqlLog(completeSql, executeTime);
+
+        } catch (Exception e) {
+            log.error("[SQLBard] execute error: ", e);
         }
-
-        SqlBardDefaultParameter sqlBardDefaultParameter = buildDefaultParameterHandler(invocation);
-
-        String currentPath = sqlBardDefaultParameter.getMappedStatement().getId();
-        if (!isAllowCurrentPath(currentPath)) {
-            return;
-        }
-
-        String sql = sqlBardDefaultParameter.getBoundSql().getSql();
-        sql = SimpleStringUtil.removeWhitespace(sql);
-
-        byte[][] sqlArray = parseSql(sql);
-
-        List<Object> sqlParamList = buildSqlParamList(sqlBardDefaultParameter);
-
-        String completeSql = buildCompleteSql(sqlArray, sqlParamList);
-
-        printSqlLog(completeSql, executeTime);
     }
 
     @Override
-    public void execute(Invocation invocation) throws Exception {
+    public void execute(Invocation invocation) {
         execute(invocation, null);
     }
 
