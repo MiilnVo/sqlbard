@@ -15,7 +15,7 @@ Rendering SQL as graceful as Bard for MyBatis
 ### 核心功能
 
 ```text
-[SQLBard] sql = SELECT app_id,app_name,app_key,app_secret FROM application_info WHERE app_id = 1 AND app_key = 'Hnlqhfaf', time = 2ms 
+[SQLBard] sql = SELECT app_id,app_name,app_key,app_secret FROM application_info WHERE app_id = 1 AND app_key = 'Hnlqhfaf'; , spend = 2ms 
 ```
 
 1. 输出完整SQL日志

@@ -333,7 +333,7 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
         if (!isShowExecuteTime()) {
             log.info("[SQLBard] sql = {}", sql);
         } else if (getMaxExecuteMillisecond() == null || (getMaxExecuteMillisecond() != null && executeTime > getMaxExecuteMillisecond())) {
-            log.info("[SQLBard] sql = {}, time = {}ms", sql, executeTime);
+            log.info("[SQLBard] sql = {} , spend = {}ms", sql, executeTime);
         }
     }
 
