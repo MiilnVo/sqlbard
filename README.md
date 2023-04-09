@@ -5,7 +5,7 @@
 
 https://sqlbard.miilnvo.com
 
-SQLBard是一款基于MyBatis的轻量级插件，旨在如诗般优雅地呈现完整SQL和执行耗时
+SQLBard是一款基于MyBatis的轻量级插件，旨在如诗般优雅地呈现完整SQL
 
 Rendering SQL as graceful as Bard for MyBatis
 

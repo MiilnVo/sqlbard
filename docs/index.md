@@ -3,7 +3,7 @@
 [![Maven Central](https://img.shields.io/badge/Maven%20Central-v1.0.0-0077CC.svg)](https://maven-badges.herokuapp.com/maven-central/com.miilnvo.sqlbard/sqlbard)
 [![License](https://img.shields.io/badge/License-Apache%202.0-339966.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
-SQLBard是一款基于MyBatis的轻量级插件，旨在如诗般优雅地呈现完整SQL和执行耗时
+SQLBard是一款基于MyBatis的轻量级插件，旨在如诗般优雅地呈现完整SQL
 
 Rendering SQL as graceful as Bard for MyBatis
 
