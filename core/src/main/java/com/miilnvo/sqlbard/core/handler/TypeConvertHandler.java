@@ -17,7 +17,7 @@ public class TypeConvertHandler {
 
     public TypeConvertHandler(String booleanStrategy, String enumStrategy) {
         this.booleanStrategy = booleanStrategy != null ? booleanStrategy : "toNumber";
-        this.enumStrategy = enumStrategy != null ? booleanStrategy : "toName";
+        this.enumStrategy = enumStrategy != null ? enumStrategy : "toName";
     }
 
     public Object convert(Object param) {
@@ -36,7 +36,7 @@ public class TypeConvertHandler {
         if (param instanceof Enum) {
             switch (enumStrategy) {
                 case "toOrdinal": return toStr(((Enum) param).ordinal());
-                case "toName":  return toStr(((Enum) param).name());
+                case "toName":    return toStr(((Enum) param).name());
             }
         }
         if (param instanceof Timestamp || param instanceof Time) {
