@@ -35,7 +35,7 @@ public class TypeConvertHandler {
         }
         if (param instanceof Enum) {
             switch (enumStrategy) {
-                case "toOrdinal": return toStr(((Enum) param).ordinal());
+                case "toOrdinal": return ((Enum) param).ordinal();
                 case "toName":    return toStr(((Enum) param).name());
             }
         }

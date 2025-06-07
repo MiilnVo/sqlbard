@@ -47,7 +47,7 @@ class SqlbardExampleApplicationTests {
 
         user.setTString("hello");
         user.setTBigDecimal(new BigDecimal("500"));
-        user.setTGender(User.Gender.male);
+        user.setTGender(User.Gender.MALE);
         user.setTEnabled(true);
         user.setTYear(Year.of(2022));
 

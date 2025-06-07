@@ -53,7 +53,7 @@ public class User {
     private Timestamp tTimestamp;
 
     public enum Gender {
-        male, woman
+        MALE, WOMAN
     }
 
 }
