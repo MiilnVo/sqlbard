@@ -1,0 +1,20 @@
+CREATE TABLE user (
+  t_integer INT NOT NULL,
+  t_float FLOAT DEFAULT NULL,
+  t_double DOUBLE DEFAULT NULL,
+  t_long BIGINT DEFAULT NULL,
+  t_char CHAR(8) DEFAULT NULL,
+  t_bytes BLOB DEFAULT NULL,
+  t_string VARCHAR(255) DEFAULT NULL,
+  t_bigdecimal DECIMAL(65,0) DEFAULT NULL,
+  t_gender VARCHAR(255) DEFAULT NULL,
+  t_enabled TINYINT DEFAULT NULL,
+  t_year INT DEFAULT NULL,
+  t_date DATE DEFAULT NULL,
+  t_time TIME DEFAULT NULL,
+  t_localdate DATE DEFAULT NULL,
+  t_localtime TIME DEFAULT NULL,
+  t_localdatetime TIMESTAMP DEFAULT NULL,
+  t_timestamp TIMESTAMP DEFAULT NULL,
+  PRIMARY KEY (t_integer)
+);
