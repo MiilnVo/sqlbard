@@ -1,6 +1,6 @@
 # SQLBard
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v1.0.0-0077CC.svg)](https://maven-badges.herokuapp.com/maven-central/com.miilnvo.sqlbard/sqlbard)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v1.0.1-0077CC.svg)](https://maven-badges.herokuapp.com/maven-central/com.miilnvo.sqlbard/sqlbard)
 [![License](https://img.shields.io/badge/License-Apache%202.0-339966.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 https://sqlbard.miilnvo.com
@@ -67,7 +67,7 @@ Closing non transactional SqlSession [org.apache.ibatis.session.defaults.Default
 <dependency>
     <groupId>com.miilnvo.sqlbard</groupId>
     <artifactId>sqlbard-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -101,7 +101,7 @@ sqlbard:
 <dependency>
     <groupId>com.miilnvo.sqlbard</groupId>
     <artifactId>sqlbard-core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
