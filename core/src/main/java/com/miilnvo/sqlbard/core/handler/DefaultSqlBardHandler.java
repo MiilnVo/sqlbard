@@ -1,15 +1,15 @@
 package com.miilnvo.sqlbard.core.handler;
 
-import com.miilnvo.sqlbard.core.pojo.SqlBardDefaultParameter;
+import com.miilnvo.sqlbard.core.pojo.SqlBardParameter;
 import com.miilnvo.sqlbard.core.util.SimpleStringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.ParameterMapping;
 import org.apache.ibatis.mapping.ParameterMode;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.reflection.MetaObject;
-import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 
@@ -43,19 +43,19 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
                 return;
             }
 
-            SqlBardDefaultParameter sqlBardDefaultParameter = buildDefaultParameterHandler(invocation);
+            SqlBardParameter sqlBardParameter = buildParameterHandler(invocation);
 
-            String currentPath = sqlBardDefaultParameter.getMappedStatement().getId();
+            String currentPath = sqlBardParameter.getMappedStatement().getId();
             if (!isAllowCurrentPath(currentPath)) {
                 return;
             }
 
-            String sql = sqlBardDefaultParameter.getBoundSql().getSql();
+            String sql = sqlBardParameter.getBoundSql().getSql();
             sql = SimpleStringUtil.removeWhitespace(sql);
 
             byte[][] sqlArray = parseSql(sql);
 
-            List<Object> sqlParamList = buildSqlParamList(sqlBardDefaultParameter);
+            List<Object> sqlParamList = buildSqlParamList(sqlBardParameter);
 
             String completeSql = buildCompleteSql(sqlArray, sqlParamList);
 
@@ -113,41 +113,40 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
     }
 
     /**
-     * 构造DefaultParameterHandler
+     * 构造SqlBardParameter
      *
      * @param invocation invocation
-     * @return SqlBardDefaultParameter
+     * @return SqlBardParameter
      * @throws Exception exception
      */
-    private SqlBardDefaultParameter buildDefaultParameterHandler(Invocation invocation) throws Exception {
-
-        DefaultParameterHandler defaultParameterHandler = (DefaultParameterHandler) invocation.getTarget();
-        Class clazz = defaultParameterHandler.getClass();
+    private SqlBardParameter buildParameterHandler(Invocation invocation) throws Exception {
+        ParameterHandler parameterHandler = (ParameterHandler) invocation.getTarget();
+        Class<? extends ParameterHandler> clazz = parameterHandler.getClass();
 
         Field parameterObjectField = clazz.getDeclaredField("parameterObject");
         parameterObjectField.setAccessible(true);
-        Object parameterObject = parameterObjectField.get(defaultParameterHandler);
+        Object parameterObject = parameterObjectField.get(parameterHandler);
 
         Field mappedStatementField = clazz.getDeclaredField("mappedStatement");
         mappedStatementField.setAccessible(true);
-        MappedStatement mappedStatement = (MappedStatement) mappedStatementField.get(defaultParameterHandler);
+        MappedStatement mappedStatement = (MappedStatement) mappedStatementField.get(parameterHandler);
 
-        return new SqlBardDefaultParameter(mappedStatement, parameterObject);
+        return new SqlBardParameter(mappedStatement, parameterObject);
     }
 
     /**
      * 构造SQL变量集合
      * Copy From org.apache.ibatis.scripting.defaults.DefaultParameterHandler
      *
-     * @param sqlBardDefaultParameter SqlBardDefaultParameter
+     * @param sqlBardParameter SqlBardParameter
      * @return List
      */
-    private List<Object> buildSqlParamList(SqlBardDefaultParameter sqlBardDefaultParameter) {
+    private List<Object> buildSqlParamList(SqlBardParameter sqlBardParameter) {
 
-        BoundSql boundSql = sqlBardDefaultParameter.getBoundSql();
-        Configuration configuration = sqlBardDefaultParameter.getConfiguration();
-        Object parameterObject = sqlBardDefaultParameter.getParameterObject();
-        TypeHandlerRegistry typeHandlerRegistry = sqlBardDefaultParameter.getTypeHandlerRegistry();
+        BoundSql boundSql = sqlBardParameter.getBoundSql();
+        Configuration configuration = sqlBardParameter.getConfiguration();
+        Object parameterObject = sqlBardParameter.getParameterObject();
+        TypeHandlerRegistry typeHandlerRegistry = sqlBardParameter.getTypeHandlerRegistry();
 
         List<Object> sqlParamList = new ArrayList<>();
         List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();

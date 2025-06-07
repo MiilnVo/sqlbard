@@ -11,7 +11,7 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
  * @since 2022-06-30
  */
 @Data
-public class SqlBardDefaultParameter {
+public class SqlBardParameter {
 
     private TypeHandlerRegistry typeHandlerRegistry;
 
@@ -23,7 +23,7 @@ public class SqlBardDefaultParameter {
 
     private Configuration configuration;
 
-    public SqlBardDefaultParameter(MappedStatement mappedStatement, Object parameterObject) {
+    public SqlBardParameter(MappedStatement mappedStatement, Object parameterObject) {
         this.mappedStatement = mappedStatement;
         this.configuration = mappedStatement.getConfiguration();
         this.typeHandlerRegistry = mappedStatement.getConfiguration().getTypeHandlerRegistry();
