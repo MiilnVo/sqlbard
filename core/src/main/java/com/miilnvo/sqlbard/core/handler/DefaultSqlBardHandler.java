@@ -100,7 +100,7 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
         return enabled;
     }
 
-    public Long getMaxExecuteMillisecond() {
+    private Long getMaxExecuteMillisecond() {
         return maxExecuteMillisecond;
     }
 
@@ -331,7 +331,7 @@ public class DefaultSqlBardHandler implements SqlBardHandler {
     private void printSqlLog(String sql, Long executeTime) {
         if (!isShowExecuteTime()) {
             log.info("[SQLBard] sql = {}", sql);
-        } else if (getMaxExecuteMillisecond() == null || (getMaxExecuteMillisecond() != null && executeTime > getMaxExecuteMillisecond())) {
+        } else if (getMaxExecuteMillisecond() == null || executeTime > getMaxExecuteMillisecond()) {
             log.info("[SQLBard] sql = {} , spend = {}ms", sql, executeTime);
         }
     }

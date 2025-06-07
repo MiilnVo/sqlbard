@@ -37,9 +37,9 @@ class SqlbardExampleApplicationTests {
         User user = new User();
 
         user.setTInteger(1);
-        user.setTFloat(new Float("2.22"));
-        user.setTDouble(new Double("3.333"));
-        user.setTLong(new Long("99999"));
+        user.setTFloat(Float.valueOf("2.22"));
+        user.setTDouble(Double.valueOf("3.333"));
+        user.setTLong(Long.valueOf("99999"));
         user.setTChar('a');
 
         byte[] b1 = new byte[]{'8'};

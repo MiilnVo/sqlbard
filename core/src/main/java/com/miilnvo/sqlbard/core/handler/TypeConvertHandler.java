@@ -11,9 +11,9 @@ import java.util.Date;
  */
 public class TypeConvertHandler {
 
-    private String booleanStrategy;
+    private final String booleanStrategy;
 
-    private String enumStrategy;
+    private final String enumStrategy;
 
     public TypeConvertHandler(String booleanStrategy, String enumStrategy) {
         this.booleanStrategy = booleanStrategy != null ? booleanStrategy : "toNumber";
@@ -35,8 +35,8 @@ public class TypeConvertHandler {
         }
         if (param instanceof Enum) {
             switch (enumStrategy) {
-                case "toOrdinal": return ((Enum) param).ordinal();
-                case "toName":    return toStr(((Enum) param).name());
+                case "toOrdinal": return ((Enum<?>) param).ordinal();
+                case "toName":    return toStr(((Enum<?>) param).name());
             }
         }
         if (param instanceof Timestamp || param instanceof Time) {
